@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>For QILA ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.card {
+    background: rgba(255,255,255,0.95);
+    padding: 25px;
+    border-radius: 25px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    text-align: center;
+    width: 85%;
+    max-width: 320px;
+    backdrop-filter: blur(10px);
+    animation: fadeIn 1s ease;
+}
+
+h1 { font-size: 22px; }
+p { font-size: 16px; }
+
+.buttons {
+    position: relative;
+    height: 140px;
+}
+
+button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 15px;
+    font-size: 16px;
+    margin: 10px;
+    transition: transform 0.2s;
+}
+
+button:active {
+    transform: scale(0.9);
+}
+
+#yesBtn { background: #4CAF50; color: white; }
+#noBtn { background: #ff4d4d; color: white; position: absolute; }
+
+.hidden { display: none; }
+
+.flower {
+    font-size: 70px;
+    animation: pop 0.5s ease;
+}
+
+.letter {
+    width: 100%;
+    height: 220px;
+    background: #fff0f5;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+    transform: scaleY(0);
+    transform-origin: top;
+    animation: openLetter 1s forwards;
+}
+
+@keyframes openLetter {
+    to { transform: scaleY(1); }
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(20px);} 
+    to {opacity: 1; transform: translateY(0);} 
+}
+
+@keyframes pop {
+    from {transform: scale(0);} 
+    to {transform: scale(1);} 
+}
+
+.heart {
+    position: absolute;
+    animation: floatUp 3s linear infinite;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-700px); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Indonesian Romantic Song -->
+<audio id="music" loop>
+    <source src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Komiku/Komiku_-_03_-_Friends.mp3" type="audio/mpeg">
+</audio>
+
+<div class="card" id="main">
+    <h1>Hey my beautiful QILA ❤️</h1>
+    <p>Do you want to stay with me forever? 🥺</p>
+    <div class="buttons">
+        <button id="yesBtn">YES 💖</button>
+        <button id="noBtn">NO 😢</button>
+    </div>
+</div>
+
+<div class="card hidden" id="result">
+    <h1>For You ❤️</h1>
+    <div class="flower">🌹</div>
+
+    <div class="letter">
+        <p>This is your online flower 🌹</p>
+        <p>But when I come, I will bring your real flower, I promise ❤️</p>
+        <p>Wait for me… I love you 💖</p>
+        <p><strong>- HAMZA</strong></p>
+    </div>
+</div>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const main = document.getElementById("main");
+const result = document.getElementById("result");
+const music = document.getElementById("music");
+
+function moveButton() {
+    const maxX = window.innerWidth - 80;
+    const maxY = window.innerHeight - 80;
+    noBtn.style.left = Math.random() * maxX + "px";
+    noBtn.style.top = Math.random() * maxY + "px";
+    vibrate();
+}
+
+function vibrate() {
+    if (navigator.vibrate) {
+        navigator.vibrate(50);
+    }
+}
+
+noBtn.addEventListener("touchstart", moveButton);
+noBtn.addEventListener("click", moveButton);
+
+yesBtn.addEventListener("click", () => {
+    main.classList.add("hidden");
+    result.classList.remove("hidden");
+    music.play();
+    vibrate();
+    createHearts();
+});
+
+function createHearts() {
+    for (let i = 0; i < 25; i++) {
+        const heart = document.createElement("div");
+        heart.innerHTML = "❤️";
+        heart.className = "heart";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.top = window.innerHeight + "px";
+        heart.style.fontSize = (20 + Math.random() * 25) + "px";
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 3000);
+    }
+}
+</script>
+
+</body>
+</html>
